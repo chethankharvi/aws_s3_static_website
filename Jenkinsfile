@@ -35,6 +35,13 @@ pipeline {
                 sh 'terraform plan'
                 }
             }
-        }            
+        }
+        stage('terraform Action'){
+            steps {
+                withAWS(credentials: 'jenkins_test_user', region: 'us-east-1'){
+                sh 'terraform ${Action} -auto-approve'
+                }
+            }
+        }
     }
 }
