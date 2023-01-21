@@ -4,7 +4,7 @@ pipeline {
         terraform 'Terraform'
     }
     parameters {
-                choice choices: ['apply', 'destroy'], description: 'Choose Action', name: 'Action'
+                choice choices: ['plan','apply', 'destroy'], description: 'Choose Action', name: 'Action'
     }
     stages {
         stage('git checkout'){
@@ -30,6 +30,9 @@ pipeline {
             }
         }
         stage('Terraform Plan'){
+            when{
+            	 expression { params.Action == 'plan' }
+            }
             steps {
                 withAWS(credentials: 'jenkins_test_user', region: 'us-east-1'){
                 sh 'terraform plan'
