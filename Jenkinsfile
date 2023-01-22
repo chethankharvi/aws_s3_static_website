@@ -15,7 +15,7 @@ pipeline {
         stage('terraform init'){
             steps{
                 withAWS(credentials: 'jenkins_test_user', region: 'us-east-1'){
-                sh 'terraform init'
+                sh 'terraform init -reconfigure'
             }
             }
         }
