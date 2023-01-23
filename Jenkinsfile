@@ -15,7 +15,7 @@ pipeline {
         stage('terraform init'){
             steps{
                 withAWS(credentials: 'jenkins_test_user', region: 'us-east-1'){
-                sh 'terraform init -reconfigure'
+                sh 'terraform init'
             }
             }
         }
@@ -40,6 +40,9 @@ pipeline {
             }
         }
         stage('terraform Action'){
+            when{
+            	 expression { params.Action != 'plan' }
+            }
             steps {
                 withAWS(credentials: 'jenkins_test_user', region: 'us-east-1'){
                 sh 'terraform ${Action} -auto-approve'
