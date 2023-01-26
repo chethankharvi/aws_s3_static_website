@@ -9,7 +9,7 @@ terraform {
     bucket = "my-s3-bucket-new"
     key    = "dev/terraform.tfstate"
     region = "us-east-1"
-    dynamodb_table = "tarraform-state-files-table"
+    #dynamodb_table = "tarraform-state-files-table"
   }
   
 }
